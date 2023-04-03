@@ -7,4 +7,10 @@
             <class name="testcases.SauceDemo"/>
         </classes>
     </test>
+
+    <test name="test demo with excel data">
+        <classes>
+            <class name="testcases.SauceDemoExcel"/>
+        </classes>
+    </test>
 </suite>

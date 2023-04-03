@@ -1,10 +1,10 @@
 package testcases;
 
 import bases.BaseTest;
-import com.company.microservices.pages.BasePage;
-import com.company.microservices.pages.LoginPage;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.company.model.User;
+import com.company.pages.CommonPage;
+import com.company.steps.LoginPageSteps;
+import com.google.gson.Gson;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,29 +14,33 @@ import java.io.FileReader;
 import static com.company.constant.Constants.URL;
 
 public class SauceDemo extends BaseTest {
-    BasePage basePage = new BasePage();
-    LoginPage loginPage = new LoginPage();
+    CommonPage commonPage;
+    LoginPageSteps loginPageSteps;
 
     @DataProvider(name = "UserJsonFile")
     public Object[][] getUserJsonFile() {
-        JsonObject data = null;
+        Gson gson = new Gson();
         try {
-            data = JsonParser.parseReader(new FileReader("src/main/resources/data.json")).getAsJsonObject();
+            User[] user = gson.fromJson(new FileReader("src/main/resources/data.json"), User[].class);
+
+            Object[][] data = new Object[user.length][1];
+            for (int i = 0; i < user.length; i++) {
+                data[i][0] = user[i];
+            }
+            return data;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
-        assert data != null;
-        String userName = data.get("userName").getAsString();
-        String password = data.get("password").getAsString();
-        return new Object[][]{{userName, password}};
     }
 
-
-    @Test
-    public void test1() {
-        basePage.goToUrl(URL)
+    @Test(dataProvider = "UserJsonFile")
+    public void loginTest(User user) {
+        loginPageSteps = new LoginPageSteps();
+        commonPage = new CommonPage();
+        commonPage.goToUrl(URL)
                 .verifyTitle();
-        loginPage.loginWithCredentials("standard_user", "sauce_secret");
+        loginPageSteps.loginWithCredentials(user.getUserName(), user.getPassword());
     }
 
 }

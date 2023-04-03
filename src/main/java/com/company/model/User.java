@@ -1,4 +1,4 @@
-package com.company.microservices.model;
+package com.company.model;
 
 import lombok.Data;
 

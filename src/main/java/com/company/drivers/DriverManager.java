@@ -1,18 +1,20 @@
 package com.company.drivers;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public synchronized static WebDriver getLocalDriver(String browser) throws Exception {
+    public synchronized static void getLocalDriver(String browser) throws Exception {
         WebDriver tDriver;
         switch (browser.toLowerCase()) {
             case "chrome":
-                tDriver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                tDriver = new ChromeDriver(chromeOptions);
                 System.out.println("created driver");
                 break;
             case "firefox":
@@ -22,7 +24,6 @@ public class DriverManager {
                 throw new Exception("Wrong browser name, pls check");
         }
         setDriver(tDriver);
-        return tDriver;
     }
 
     public static WebDriver getDriver() {
