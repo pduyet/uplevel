@@ -1,4 +1,4 @@
-package com.company.Utils;
+package com.company.utils;
 
 import com.company.constant.Constants;
 import com.company.drivers.DriverManager;

@@ -1,6 +1,6 @@
-package com.company.Utils;
+package com.company.utils;
 
-import com.company.Report.AllureManager;
+import com.company.report.AllureManager;
 import com.company.drivers.DriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestListener;

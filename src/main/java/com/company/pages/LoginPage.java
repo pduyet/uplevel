@@ -1,6 +1,6 @@
 package com.company.pages;
 
-import com.company.Utils.BaseWebUI;
+import com.company.utils.BaseWebUI;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BaseWebUI {

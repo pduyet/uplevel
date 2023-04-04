@@ -1,9 +1,9 @@
 package testcases;
 
 import bases.BaseTest;
-import com.company.Utils.ExcelConfig;
 import com.company.pages.CommonPage;
 import com.company.steps.*;
+import com.company.utils.ExcelConfig;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,7 +26,7 @@ public class SauceDemoExcel extends BaseTest {
         return excelConfig.data();
     }
 
-    @Test(dataProvider = "excelUser", enabled = false)
+    @Test(dataProvider = "excelUser")
     public void loginTest(String user, String password) {
         loginPageSteps = new LoginPageSteps();
         commonPage = new CommonPage();

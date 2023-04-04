@@ -1,7 +1,7 @@
 package bases;
 
-import com.company.Utils.TestListener;
 import com.company.drivers.DriverManager;
+import com.company.utils.TestListener;
 import org.testng.annotations.*;
 
 @Listeners({TestListener.class})

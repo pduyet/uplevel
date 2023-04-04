@@ -1,4 +1,4 @@
-package com.company.Report;
+package com.company.report;
 
 import com.company.drivers.DriverManager;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;

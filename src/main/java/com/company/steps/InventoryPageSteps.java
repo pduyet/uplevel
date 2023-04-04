@@ -1,7 +1,7 @@
 package com.company.steps;
 
-import com.company.Utils.BaseWebUI;
-import com.company.Utils.Log4j;
+import com.company.utils.BaseWebUI;
+import com.company.utils.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

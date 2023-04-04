@@ -1,7 +1,7 @@
 package com.company.steps;
 
-import com.company.Report.AllureManager;
-import com.company.Utils.BaseWebUI;
+import com.company.report.AllureManager;
+import com.company.utils.BaseWebUI;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
