@@ -1,6 +1,6 @@
 package com.company.steps;
 
-import com.company.utils.BaseWebUI;
+import com.company.core.basehandle.BaseWebUI;
 import com.company.utils.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

@@ -1,7 +1,7 @@
 package com.company.utils;
 
 import com.company.report.AllureManager;
-import com.company.drivers.DriverManager;
+import com.company.core.drivers.DriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;

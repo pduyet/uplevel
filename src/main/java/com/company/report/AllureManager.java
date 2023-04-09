@@ -1,6 +1,6 @@
 package com.company.report;
 
-import com.company.drivers.DriverManager;
+import com.company.core.drivers.DriverManager;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Attachment;

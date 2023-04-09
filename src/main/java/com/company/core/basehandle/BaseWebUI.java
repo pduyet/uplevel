@@ -1,7 +1,7 @@
-package com.company.utils;
+package com.company.core.basehandle;
 
 import com.company.constant.Constants;
-import com.company.drivers.DriverManager;
+import com.company.core.drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +23,10 @@ public class BaseWebUI {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    protected void visitWebsite(String url) {
+        driver.get(url);
     }
 
     protected void waitForElementIsClickable(By by) {

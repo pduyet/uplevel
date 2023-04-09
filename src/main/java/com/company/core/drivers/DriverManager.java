@@ -1,9 +1,12 @@
-package com.company.drivers;
+package com.company.core.drivers;
 
+import com.company.constant.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.time.Duration;
 
 public class DriverManager {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -23,6 +26,9 @@ public class DriverManager {
             default:
                 throw new Exception("Wrong browser name, pls check");
         }
+        tDriver.manage().window().maximize();
+        tDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_TIME));
+        tDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.WAIT_TIME));
         setDriver(tDriver);
     }
 
@@ -34,7 +40,7 @@ public class DriverManager {
         DriverManager.driver.set(driver);
     }
 
-    public static void quitDriver() throws Exception {
+    public static void quitDriver() {
         if (getDriver() != null) {
             getDriver().quit();
         }

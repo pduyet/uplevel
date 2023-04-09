@@ -1,6 +1,6 @@
 package com.company.steps;
 
-import com.company.utils.BaseWebUI;
+import com.company.core.basehandle.BaseWebUI;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 

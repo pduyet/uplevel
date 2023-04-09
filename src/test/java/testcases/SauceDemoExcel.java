@@ -1,7 +1,6 @@
 package testcases;
 
 import bases.BaseTest;
-import com.company.pages.CommonPage;
 import com.company.steps.*;
 import com.company.utils.ExcelConfig;
 import org.testng.annotations.DataProvider;
@@ -12,7 +11,6 @@ import static com.company.constant.Constants.URL;
 public class SauceDemoExcel extends BaseTest {
 
     ExcelConfig excelConfig = new ExcelConfig("src/main/resources/data.xlsx");
-    CommonPage commonPage;
     LoginPageSteps loginPageSteps;
     InventoryPageSteps inventoryPageSteps;
     CartPageSteps cartPageSteps;
@@ -29,22 +27,20 @@ public class SauceDemoExcel extends BaseTest {
     @Test(dataProvider = "excelUser")
     public void loginTest(String user, String password) {
         loginPageSteps = new LoginPageSteps();
-        commonPage = new CommonPage();
-        commonPage.goToUrl(URL)
+        loginPageSteps.goToUrl(URL)
                 .verifyTitle();
         loginPageSteps.loginWithCredentials(user, password);
     }
 
     @Test
     public void buyProducts() {
-        commonPage = new CommonPage();
         loginPageSteps = new LoginPageSteps();
         inventoryPageSteps = new InventoryPageSteps();
         cartPageSteps = new CartPageSteps();
         checkoutInformationPageSteps = new CheckoutInformationPageSteps();
         checkoutOverviewPageSteps = new CheckoutOverviewPageSteps();
         completeOrderPageSteps = new CompleteOrderPageSteps();
-        commonPage.goToUrl(URL).verifyTitle();
+        loginPageSteps.goToUrl(URL).verifyTitle();
         loginPageSteps.loginWithCredentials("standard_user", "secret_sauce");
         inventoryPageSteps.verifyLoginSuccessfully().buyRandom().verifyTotalBadgeShoppingCart().navigateToCartPage();
         cartPageSteps.verifyNavigateToCartPageSuccessfully().navigateToCheckoutYourInformation();

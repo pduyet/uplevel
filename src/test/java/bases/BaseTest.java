@@ -1,6 +1,6 @@
 package bases;
 
-import com.company.drivers.DriverManager;
+import com.company.core.drivers.DriverManager;
 import com.company.utils.TestListener;
 import org.testng.annotations.*;
 
@@ -14,7 +14,7 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void quitDriver() throws Exception {
+    public void quitDriver() {
         DriverManager.quitDriver();
     }
 }

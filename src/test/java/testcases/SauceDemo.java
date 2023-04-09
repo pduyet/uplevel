@@ -2,7 +2,6 @@ package testcases;
 
 import bases.BaseTest;
 import com.company.model.User;
-import com.company.pages.CommonPage;
 import com.company.steps.LoginPageSteps;
 import com.google.gson.Gson;
 import org.testng.annotations.DataProvider;
@@ -14,7 +13,6 @@ import java.io.FileReader;
 import static com.company.constant.Constants.URL;
 
 public class SauceDemo extends BaseTest {
-    CommonPage commonPage;
     LoginPageSteps loginPageSteps;
 
     @DataProvider(name = "UserJsonFile")
@@ -37,8 +35,7 @@ public class SauceDemo extends BaseTest {
     @Test(dataProvider = "UserJsonFile")
     public void loginTest(User user) {
         loginPageSteps = new LoginPageSteps();
-        commonPage = new CommonPage();
-        commonPage.goToUrl(URL)
+        loginPageSteps.goToUrl(URL)
                 .verifyTitle();
         loginPageSteps.loginWithCredentials(user.getUserName(), user.getPassword());
     }
