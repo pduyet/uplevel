@@ -24,15 +24,17 @@ public class SauceDemoExcel extends BaseTest {
         return excelConfig.data();
     }
 
-    @Test(dataProvider = "excelUser")
+    @Test(dataProvider = "excelUser", groups = {"group 1"})
     public void loginTest(String user, String password) {
         loginPageSteps = new LoginPageSteps();
+        inventoryPageSteps = new InventoryPageSteps();
         loginPageSteps.goToUrl(URL)
                 .verifyTitle();
         loginPageSteps.loginWithCredentials(user, password);
+        inventoryPageSteps.verifyLoginSuccessfully();
     }
 
-    @Test
+    @Test(groups = {"group 2"})
     public void buyProducts() {
         loginPageSteps = new LoginPageSteps();
         inventoryPageSteps = new InventoryPageSteps();

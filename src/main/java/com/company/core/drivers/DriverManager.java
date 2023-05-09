@@ -29,6 +29,7 @@ public class DriverManager {
         tDriver.manage().window().maximize();
         tDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_TIME));
         tDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.WAIT_TIME));
+        tDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         setDriver(tDriver);
     }
 

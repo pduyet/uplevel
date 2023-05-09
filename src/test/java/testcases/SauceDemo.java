@@ -2,8 +2,12 @@ package testcases;
 
 import bases.BaseTest;
 import com.company.model.User;
+import com.company.steps.InventoryPageSteps;
 import com.company.steps.LoginPageSteps;
+import com.company.utils.JsonConfig;
 import com.google.gson.Gson;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,30 +18,25 @@ import static com.company.constant.Constants.URL;
 
 public class SauceDemo extends BaseTest {
     LoginPageSteps loginPageSteps;
+    InventoryPageSteps inventoryPageSteps;
+
+    JsonConfig jsonConfig = new JsonConfig();
 
     @DataProvider(name = "UserJsonFile")
     public Object[][] getUserJsonFile() {
-        Gson gson = new Gson();
-        try {
-            User[] user = gson.fromJson(new FileReader("src/main/resources/data.json"), User[].class);
-
-            Object[][] data = new Object[user.length][1];
-            for (int i = 0; i < user.length; i++) {
-                data[i][0] = user[i];
-            }
-            return data;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return jsonConfig.data();
     }
 
-    @Test(dataProvider = "UserJsonFile")
+    @Test(dataProvider = "UserJsonFile", groups = {"group 1"})
+    @Feature("Login")
+    @Story("I want to login")
     public void loginTest(User user) {
         loginPageSteps = new LoginPageSteps();
+        inventoryPageSteps = new InventoryPageSteps();
         loginPageSteps.goToUrl(URL)
                 .verifyTitle();
         loginPageSteps.loginWithCredentials(user.getUserName(), user.getPassword());
+        inventoryPageSteps.verifyLoginSuccessfully();
     }
 
 }

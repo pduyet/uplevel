@@ -11,26 +11,25 @@ import static org.openqa.selenium.OutputType.BYTES;
 public class AllureManager {
     public AllureManager() {}
 
-    public static void setAllureEnvironmentInformation(String url, String browser, String env) {
+    public static void setAllureEnvironmentInformation(String key, String value) {
         AllureEnvironmentWriter.allureEnvironmentWriter(
                 ImmutableMap.<String, String>builder()
-                        .build(), System.getProperty("user.dir") + "/allure-results/");
+                        .put(key, value)
+                        .build(), System.getProperty("user.dir") + "/target/allure-results/");
     }
 
 
     @Attachment(value = "Screenshot", type = "image/png")
-    public static byte[] takeScreenshotToAttachOnAllureReport() {
+    public static void takeScreenshotToAttachOnAllureReport() {
         try {
-            return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(BYTES);
+            ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(BYTES);
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return new byte[0];
     }
 
     //Text attachments for Allure
     @Attachment(value = "{0}", type = "text/plain")
-    public static String saveTextLog(String message) {
-        return message;
+    public static void saveTextLog(String message) {
     }
 }

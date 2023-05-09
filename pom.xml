@@ -21,6 +21,7 @@
         <gson-version>2.10.1</gson-version>
         <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
         <google.guava.version>31.1-jre</google.guava.version>
+        <xmlFileName>testng.xml</xmlFileName>
     </properties>
 
     <dependencies>
@@ -63,7 +64,7 @@
         <dependency>
             <groupId>com.github.automatedowl</groupId>
             <artifactId>allure-environment-writer</artifactId>
-            <version>1.0.0</version>
+            <version>${allure-environment-writer.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
@@ -82,14 +83,15 @@
                 <version>${maven-surfire-version}</version>
                 <configuration>
                     <suiteXmlFiles>
-<!--                        <suiteXmlFile>${xmlFileName}</suiteXmlFile>-->
+                        <suiteXmlFile>${xmlFileName}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspecjweaver-version}/aspectjweaver-${aspecjweaver-version}.jar"
                     </argLine>
-                    <!--                    <systemPropertyVariables>-->
-                    <!--                        <allure.results.directory>target/allure-results</allure.results.directory>-->
-                    <!--                    </systemPropertyVariables>-->
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                    <groups>group 1</groups>
                 </configuration>
             </plugin>
         </plugins>

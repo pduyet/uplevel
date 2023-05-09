@@ -7,13 +7,13 @@ import org.testng.annotations.*;
 @Listeners({TestListener.class})
 public class BaseTest {
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     @Parameters({"browser"})
     public void createDriver(@Optional("chrome") String browser) throws Exception {
         DriverManager.getLocalDriver(browser);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void quitDriver() {
         DriverManager.quitDriver();
     }
