@@ -36,17 +36,17 @@ public class ExcelConfig {
     }
 
     public int getNumRow() {
-        sh = wb.getSheetAt(0);
+        sh = wb.getSheet("Test data");
         return sh.getLastRowNum();
     }
 
     public int getColNum() {
-        sh = wb.getSheetAt(0);
+        sh = wb.getSheet("Test data");
         return sh.getRow(0).getLastCellNum();
     }
 
     public String getDataValue(int rowNum, int colNum) {
-        sh = wb.getSheetAt(0);
+        sh = wb.getSheet("Test data");
         DataFormatter df = new DataFormatter();
         try {
             return df.formatCellValue(sh.getRow(rowNum).getCell(colNum));
@@ -58,6 +58,8 @@ public class ExcelConfig {
     public Object[][] data() {
         int rowNum = getNumRow();
         int colNum = getColNum();
+        System.out.println("Row num: " + rowNum);
+        System.out.println("Col num: " + colNum);
         Object[][] obj = new Object[rowNum][colNum];
         int currentRow = 0;
         for (int i = 1; i <= rowNum; i++) {
