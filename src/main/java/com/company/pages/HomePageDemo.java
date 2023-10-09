@@ -15,4 +15,6 @@ public class HomePageDemo {
 
     public static By SHOPPING_CART = By.xpath("//span[normalize-space()='Shopping cart']");
 
+    public static By LIST_PRODUCT_SHOPPING_CART = By.xpath("//div[@class='flyout-cart active']//div[@class='name']/a");
+
 }

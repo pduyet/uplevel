@@ -44,6 +44,7 @@ public class DemoWebShop extends BaseTest {
         bookPageSteps.navigateToBookPageSuccessfully();
         bookPageSteps.getListRating();
         bookPageSteps.buyItemsHighestRating();
+        bookPageSteps.verifyProductAdded();
     }
 
     @Test(enabled = false)

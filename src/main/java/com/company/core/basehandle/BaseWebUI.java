@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +19,7 @@ public class BaseWebUI {
 
     public WebDriver driver;
     WebDriverWait wait;
+    Actions actions;
 
     public BaseWebUI() {
         try {
@@ -83,7 +85,8 @@ public class BaseWebUI {
     }
 
     protected By replaceValueInXpath(String oldXpath, String oldVal, String newVal) {
-        return By.xpath(oldXpath.replace(oldVal, newVal));
+        String newXpath = oldXpath.replace(oldVal, newVal);
+        return By.xpath(newXpath);
     }
 
     protected String getTextElement(By by) {
@@ -100,10 +103,6 @@ public class BaseWebUI {
         }
     }
 
-    protected boolean waitForElementIsPresence(By by) {
-        return driver.findElement(by).isDisplayed();
-    }
-
     protected void waitForElementIsNotPresence(By by, int time) {
         try {
             wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
@@ -112,5 +111,10 @@ public class BaseWebUI {
             Assert.fail("Timeout for wait element: " + by.toString() + " on " + time);
             System.out.println(error.getMessage());
         }
+    }
+
+    protected void hoverToElement(By by) {
+        actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(by)).build().perform();
     }
 }
