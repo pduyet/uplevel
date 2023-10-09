@@ -7,7 +7,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -27,6 +29,10 @@ public class BaseWebUI {
 
     protected void visitWebsite(String url) {
         driver.get(url);
+    }
+
+    protected String getPageUrl() {
+        return driver.getCurrentUrl();
     }
 
     protected void waitForElementIsClickable(By by) {
@@ -54,24 +60,57 @@ public class BaseWebUI {
         driver.findElement(by).sendKeys(value);
     }
 
-    protected List<WebElement> getListElements (By by) {
+    protected List<WebElement> getListElements(By by) {
         return driver.findElements(by);
     }
 
     protected boolean elementIsPresent(By by) {
         try {
-           driver.findElement(by);
-           return true;
+            driver.findElement(by);
+            return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public By replaceValueInXpath(String oldXpath, String oldVal, String newVal) {
+    protected void selectByValue(By by, String value) {
+        Select slc = new Select(driver.findElement(by));
+        slc.selectByVisibleText(value);
+    }
+
+    protected boolean elementIsChecked(By by) {
+        return driver.findElement(by).isSelected();
+    }
+
+    protected By replaceValueInXpath(String oldXpath, String oldVal, String newVal) {
         return By.xpath(oldXpath.replace(oldVal, newVal));
     }
 
-    public String getTextElement(By by) {
+    protected String getTextElement(By by) {
         return driver.findElement(by).getText();
+    }
+
+    protected void waitForElementIsPresence(By by, int time) {
+        try {
+            wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        } catch (Throwable error) {
+            Assert.fail("Timeout for wait element: " + by.toString() + " on " + time);
+            System.out.println(error.getMessage());
+        }
+    }
+
+    protected boolean waitForElementIsPresence(By by) {
+        return driver.findElement(by).isDisplayed();
+    }
+
+    protected void waitForElementIsNotPresence(By by, int time) {
+        try {
+            wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        } catch (Throwable error) {
+            Assert.fail("Timeout for wait element: " + by.toString() + " on " + time);
+            System.out.println(error.getMessage());
+        }
     }
 }

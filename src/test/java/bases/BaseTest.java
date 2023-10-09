@@ -15,6 +15,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void quitDriver() {
-        DriverManager.quitDriver();
+//        DriverManager.quitDriver();
     }
 }

@@ -16,6 +16,7 @@ public class DriverManager {
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 tDriver = new ChromeDriver(chromeOptions);
                 System.out.println("created driver");
