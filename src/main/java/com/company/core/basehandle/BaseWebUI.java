@@ -2,10 +2,7 @@ package com.company.core.basehandle;
 
 import com.company.constant.Constants;
 import com.company.core.drivers.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -14,6 +11,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 public class BaseWebUI {
 
@@ -116,5 +114,23 @@ public class BaseWebUI {
     protected void hoverToElement(By by) {
         actions = new Actions(driver);
         actions.moveToElement(driver.findElement(by)).build().perform();
+    }
+
+    protected void waitForPageReadyForState(int time) {
+        wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
+
+        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
+    }
+
+    protected void closeATab() {
+        DriverManager.getDriver().close();
+    }
+
+    protected void switchToNewTab() {
+        Set<String> handles = DriverManager.getDriver().getWindowHandles();
+        for (String handle : handles) {
+            DriverManager.getDriver().switchTo().window(handle);
+        }
     }
 }
