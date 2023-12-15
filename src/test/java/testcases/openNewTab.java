@@ -5,7 +5,7 @@ import com.company.steps.GitPageSteps;
 import com.company.steps.MDNPageSteps;
 import org.testng.annotations.Test;
 
-public class OpenNewTab extends BaseTest {
+public class openNewTab extends BaseTest {
 
     MDNPageSteps mdnPageSteps;
     GitPageSteps gitPageSteps;
